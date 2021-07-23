@@ -4,12 +4,10 @@ import time
 import tensorflow as tf
 from imageai.Detection import ObjectDetection
 
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
 
-config = ConfigProto()
+config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
+session = tf.compat.v1.InteractiveSession(config=config)
 gpu_options = tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.333)
 sess = tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(gpu_options=gpu_options))
 
@@ -37,7 +35,6 @@ for i in SLfilelist:
     detector.setModelTypeAsYOLOv3()
     detector.setModelPath( os.path.join(path , "yolo.h5")) # Download the model via this link https://github.com/OlafenwaMoses/ImageAI/releases/tag/1.0
     detector.loadModel(detection_speed="flash")
-    #print(os.path.join(execution_path , "1.jpg"))
     detections = detector.detectObjectsFromImage(input_image=oldpath, output_image_path=newpath)
     for eachObject in detections:
         print(eachObject["name"] , " : ", eachObject["percentage_probability"], " : ", eachObject["box_points"] )
