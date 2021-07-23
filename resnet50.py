@@ -6,7 +6,6 @@ import numpy as np
 import tensorflow as tf
 from imageai.Detection import ObjectDetection
 
-
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
 session = tf.compat.v1.InteractiveSession(config=config)
